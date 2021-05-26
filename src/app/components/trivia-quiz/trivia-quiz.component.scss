@@ -1,0 +1,22 @@
+h1{
+    text-align: justify;
+    padding: 10px;
+}
+
+h3{
+    padding: 10px;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+.radio:checked~::after{
+    background-color: red;
+}
+
+button{
+    float: right;
+    margin-right: 35%;
+    margin-bottom: 20px;
+}

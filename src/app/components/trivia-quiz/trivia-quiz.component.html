@@ -1,0 +1,41 @@
+<div class="container" *ngIf="triviaQuestionList.length > 0">
+    <h1>Quiz App</h1>
+    <div class="card col-md-8 my-3"  *ngIf="!quizCompleted">
+        <div class="card-header">
+            <b>Question No.{{questionNumberInProgress + 1}} :</b>
+            <p>{{triviaQuestionList[questionNumberInProgress].question}}</p>
+        </div>
+        <div class="card-body">
+            <h6 class="card-title">Select an option</h6>
+            <div *ngFor="let option of triviaQuestionList[questionNumberInProgress].options" class="card-text">
+                <a href="#" class="list-group-item list-group-item-action" (click)="onOptionSelected(option)">{{option}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-md-8 my-3" *ngIf="quizCompleted">
+        <h3>Result</h3>
+        <div *ngFor="let question of triviaQuestionList; let i = index">
+            <div class="card-header">
+                <span >
+                    <b>Question No.{{i + 1}} : </b>
+                    <b *ngIf="question.selectedOption == question.correct_answer" class="text-success">Right Answer</b>
+                    <b *ngIf="question.selectedOption != question.correct_answer" class="text-danger">Wrong Answer</b>
+                </span>
+                <p>{{question.question}}</p>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let option of question.options" class="card-text">
+                    <a *ngIf="((option == question.selectedOption) && (question.selectedOption == question.correct_answer)) || (option == question.correct_answer)"  href="#" class="list-group-item list-group-item-success" (click)="onOptionSelected(option)" disabled>{{option}}</a>
+                    <a *ngIf="(option == question.selectedOption) && (question.selectedOption != question.correct_answer)"  href="#" class="list-group-item list-group-item-danger" (click)="onOptionSelected(option)" disabled>{{option}}</a>
+                    <a *ngIf="(option != question.selectedOption && option != question.correct_answer)" href="#" class="list-group-item" (click)="onOptionSelected(option)" disabled>{{option}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="quizCompleted">
+        <button class="btn btn-outline-dark col-md-3 ms-3" (click)="onRetakeQuizButtonClick()">Re-take quiz</button>
+    </div>
+</div>
+
+
